@@ -1,0 +1,39 @@
+﻿<Window x:Class="Accounting.Windows.Prog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Accounting.Windows"
+        mc:Ignorable="d"
+        Title="О программе" Height="400" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Image Source="/PNG/icon-technician.png" VerticalAlignment="Top" Height="100" Width="100"/>
+        <Line Margin="10" X1="0" Y1="100" X2="380" Y2="100" Stroke="Black"/>
+        <TextBlock Margin="50,130,50,0" TextAlignment="Center">
+            ПРИЛОЖЕНИЕ
+            <LineBreak/>
+            Учет компьютерной техники в колледже.
+            <LineBreak/>
+            <LineBreak/>
+            ОПИСАНИЕ
+            <LineBreak/>
+            Программа для учетов компьютеров и
+            <LineBreak/>
+            сотрудников учебного заведения.
+            <LineBreak/>
+            Вы можете добовлять и редактировать
+            <LineBreak/>
+             содержимое компьютерной техники.
+            <LineBreak/>
+            <LineBreak/>
+            ВЕРСИЯ 1.0
+            <LineBreak/>
+            <LineBreak/>
+            РАЗРАБОТЧИК ПРОГРАММЫ
+            <LineBreak/>
+            Магарян Левон Левонович
+            <LineBreak/>
+            Студент 20-КИС-2
+        </TextBlock>
+    </Grid>
+</Window>

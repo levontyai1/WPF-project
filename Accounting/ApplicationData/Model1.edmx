@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Computer">
+          <Key>
+            <PropertyRef Name="IDComputer" />
+          </Key>
+          <Property Name="IDComputer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Network_name" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IpAddress" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="System_unit" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="System_board" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Processor" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RAM" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Video_card" Type="varchar" MaxLength="50" />
+          <Property Name="Video_memory" Type="varchar" MaxLength="20" />
+          <Property Name="HDD" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="HDD_capacity" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CD_ROM" Type="varchar" MaxLength="20" />
+          <Property Name="Monitor" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Monitor_2" Type="varchar" MaxLength="20" />
+          <Property Name="Keyboard" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Mouse" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Printer" Type="varchar" MaxLength="50" />
+          <Property Name="Scanner" Type="varchar" MaxLength="20" />
+          <Property Name="Price_all" Type="money" Nullable="false" />
+          <Property Name="Purchase_date" Type="date" Nullable="false" />
+          <Property Name="OS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="IDProgram" />
+          </Key>
+          <Property Name="IDProgram" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Program_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Installation_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Program_Computer">
+          <Key>
+            <PropertyRef Name="IDProgram_Computer" />
+          </Key>
+          <Property Name="IDProgram_Computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDProgram" Type="int" Nullable="false" />
+          <Property Name="IDComputer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RaM">
+          <Key>
+            <PropertyRef Name="IDRaM" />
+          </Key>
+          <Property Name="IDRaM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Repair_date" Type="date" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type_of_repair" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RaM_Computer">
+          <Key>
+            <PropertyRef Name="IDRaM_Computer" />
+          </Key>
+          <Property Name="IDRaM_Computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDRaM" Type="int" Nullable="false" />
+          <Property Name="IDComputer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Account_name" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="11" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Creation_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Computer">
+          <Key>
+            <PropertyRef Name="IDUser_Computer" />
+          </Key>
+          <Property Name="IDUser_Computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+          <Property Name="IDComputer" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Program_C__IDCom__2D27B809">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="Program_Computer" Type="Self.Program_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="IDComputer" />
+            </Principal>
+            <Dependent Role="Program_Computer">
+              <PropertyRef Name="IDComputer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Program_C__IDPro__2C3393D0">
+          <End Role="Program" Type="Self.Program" Multiplicity="1" />
+          <End Role="Program_Computer" Type="Self.Program_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="IDProgram" />
+            </Principal>
+            <Dependent Role="Program_Computer">
+              <PropertyRef Name="IDProgram" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RaM_Compu__IDCom__34C8D9D1">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="RaM_Computer" Type="Self.RaM_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="IDComputer" />
+            </Principal>
+            <Dependent Role="RaM_Computer">
+              <PropertyRef Name="IDComputer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RaM_Compu__IDRaM__33D4B598">
+          <End Role="RaM" Type="Self.RaM" Multiplicity="1" />
+          <End Role="RaM_Computer" Type="Self.RaM_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RaM">
+              <PropertyRef Name="IDRaM" />
+            </Principal>
+            <Dependent Role="RaM_Computer">
+              <PropertyRef Name="IDRaM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Comp__IDCom__30F848ED">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="User_Computer" Type="Self.User_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="IDComputer" />
+            </Principal>
+            <Dependent Role="User_Computer">
+              <PropertyRef Name="IDComputer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Comp__IDUse__300424B4">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Computer" Type="Self.User_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="User_Computer">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Computer" EntityType="Self.Computer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Program_Computer" EntityType="Self.Program_Computer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RaM" EntityType="Self.RaM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RaM_Computer" EntityType="Self.RaM_Computer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Computer" EntityType="Self.User_Computer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Program_C__IDCom__2D27B809" Association="Self.FK__Program_C__IDCom__2D27B809">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="Program_Computer" EntitySet="Program_Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Program_C__IDPro__2C3393D0" Association="Self.FK__Program_C__IDPro__2C3393D0">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="Program_Computer" EntitySet="Program_Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RaM_Compu__IDCom__34C8D9D1" Association="Self.FK__RaM_Compu__IDCom__34C8D9D1">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="RaM_Computer" EntitySet="RaM_Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RaM_Compu__IDRaM__33D4B598" Association="Self.FK__RaM_Compu__IDRaM__33D4B598">
+            <End Role="RaM" EntitySet="RaM" />
+            <End Role="RaM_Computer" EntitySet="RaM_Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Comp__IDCom__30F848ED" Association="Self.FK__User_Comp__IDCom__30F848ED">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="User_Computer" EntitySet="User_Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Comp__IDUse__300424B4" Association="Self.FK__User_Comp__IDUse__300424B4">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Computer" EntitySet="User_Computer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Computer">
+          <Key>
+            <PropertyRef Name="IDComputer" />
+          </Key>
+          <Property Name="IDComputer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Network_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IpAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="System_unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="System_board" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Processor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RAM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Video_card" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Video_memory" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HDD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HDD_capacity" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CD_ROM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Monitor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Monitor_2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Keyboard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mouse" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Printer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Scanner" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Price_all" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Purchase_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Program_Computer" Relationship="Self.FK__Program_C__IDCom__117F9D94" FromRole="Computer" ToRole="Program_Computer" />
+          <NavigationProperty Name="RaM_Computer" Relationship="Self.FK__RaM_Compu__IDCom__1CF15040" FromRole="Computer" ToRole="RaM_Computer" />
+          <NavigationProperty Name="User_Computer" Relationship="Self.FK__User_Comp__IDCom__173876EA" FromRole="Computer" ToRole="User_Computer" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="IDProgram" />
+          </Key>
+          <Property Name="IDProgram" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Program_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Installation_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Program_Computer" Relationship="Self.FK__Program_C__IDPro__108B795B" FromRole="Program" ToRole="Program_Computer" />
+        </EntityType>
+        <EntityType Name="Program_Computer">
+          <Key>
+            <PropertyRef Name="IDProgram_Computer" />
+          </Key>
+          <Property Name="IDProgram_Computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDProgram" Type="Int32" Nullable="false" />
+          <Property Name="IDComputer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computer" Relationship="Self.FK__Program_C__IDCom__117F9D94" FromRole="Program_Computer" ToRole="Computer" />
+          <NavigationProperty Name="Program" Relationship="Self.FK__Program_C__IDPro__108B795B" FromRole="Program_Computer" ToRole="Program" />
+        </EntityType>
+        <EntityType Name="RaM">
+          <Key>
+            <PropertyRef Name="IDRaM" />
+          </Key>
+          <Property Name="IDRaM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Repair_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type_of_repair" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="RaM_Computer" Relationship="Self.FK__RaM_Compu__IDRaM__1BFD2C07" FromRole="RaM" ToRole="RaM_Computer" />
+        </EntityType>
+        <EntityType Name="RaM_Computer">
+          <Key>
+            <PropertyRef Name="IDRaM_Computer" />
+          </Key>
+          <Property Name="IDRaM_Computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDRaM" Type="Int32" Nullable="false" />
+          <Property Name="IDComputer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computer" Relationship="Self.FK__RaM_Compu__IDCom__1CF15040" FromRole="RaM_Computer" ToRole="Computer" />
+          <NavigationProperty Name="RaM" Relationship="Self.FK__RaM_Compu__IDRaM__1BFD2C07" FromRole="RaM_Computer" ToRole="RaM" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Account_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Creation_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="User_Computer" Relationship="Self.FK__User_Comp__IDUse__164452B1" FromRole="User" ToRole="User_Computer" />
+        </EntityType>
+        <EntityType Name="User_Computer">
+          <Key>
+            <PropertyRef Name="IDUser_Computer" />
+          </Key>
+          <Property Name="IDUser_Computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <Property Name="IDComputer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computer" Relationship="Self.FK__User_Comp__IDCom__173876EA" FromRole="User_Computer" ToRole="Computer" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User_Comp__IDUse__164452B1" FromRole="User_Computer" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Program_C__IDCom__117F9D94">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="Program_Computer" Type="Self.Program_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="IDComputer" />
+            </Principal>
+            <Dependent Role="Program_Computer">
+              <PropertyRef Name="IDComputer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RaM_Compu__IDCom__1CF15040">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="RaM_Computer" Type="Self.RaM_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="IDComputer" />
+            </Principal>
+            <Dependent Role="RaM_Computer">
+              <PropertyRef Name="IDComputer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Comp__IDCom__173876EA">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="User_Computer" Type="Self.User_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="IDComputer" />
+            </Principal>
+            <Dependent Role="User_Computer">
+              <PropertyRef Name="IDComputer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Program_C__IDPro__108B795B">
+          <End Role="Program" Type="Self.Program" Multiplicity="1" />
+          <End Role="Program_Computer" Type="Self.Program_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="IDProgram" />
+            </Principal>
+            <Dependent Role="Program_Computer">
+              <PropertyRef Name="IDProgram" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RaM_Compu__IDRaM__1BFD2C07">
+          <End Role="RaM" Type="Self.RaM" Multiplicity="1" />
+          <End Role="RaM_Computer" Type="Self.RaM_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RaM">
+              <PropertyRef Name="IDRaM" />
+            </Principal>
+            <Dependent Role="RaM_Computer">
+              <PropertyRef Name="IDRaM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Comp__IDUse__164452B1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Computer" Type="Self.User_Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="User_Computer">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AccountingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Computer" EntityType="Self.Computer" />
+          <EntitySet Name="Program" EntityType="Self.Program" />
+          <EntitySet Name="Program_Computer" EntityType="Self.Program_Computer" />
+          <EntitySet Name="RaM" EntityType="Self.RaM" />
+          <EntitySet Name="RaM_Computer" EntityType="Self.RaM_Computer" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="User_Computer" EntityType="Self.User_Computer" />
+          <AssociationSet Name="FK__Program_C__IDCom__117F9D94" Association="Self.FK__Program_C__IDCom__117F9D94">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="Program_Computer" EntitySet="Program_Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RaM_Compu__IDCom__1CF15040" Association="Self.FK__RaM_Compu__IDCom__1CF15040">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="RaM_Computer" EntitySet="RaM_Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Comp__IDCom__173876EA" Association="Self.FK__User_Comp__IDCom__173876EA">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="User_Computer" EntitySet="User_Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Program_C__IDPro__108B795B" Association="Self.FK__Program_C__IDPro__108B795B">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="Program_Computer" EntitySet="Program_Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RaM_Compu__IDRaM__1BFD2C07" Association="Self.FK__RaM_Compu__IDRaM__1BFD2C07">
+            <End Role="RaM" EntitySet="RaM" />
+            <End Role="RaM_Computer" EntitySet="RaM_Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Comp__IDUse__164452B1" Association="Self.FK__User_Comp__IDUse__164452B1">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Computer" EntitySet="User_Computer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="AccountingEntities">
+          <EntitySetMapping Name="Computer">
+            <EntityTypeMapping TypeName="Model.Computer">
+              <MappingFragment StoreEntitySet="Computer">
+                <ScalarProperty Name="IDComputer" ColumnName="IDComputer" />
+                <ScalarProperty Name="Network_name" ColumnName="Network_name" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="System_unit" ColumnName="System_unit" />
+                <ScalarProperty Name="System_board" ColumnName="System_board" />
+                <ScalarProperty Name="Processor" ColumnName="Processor" />
+                <ScalarProperty Name="RAM" ColumnName="RAM" />
+                <ScalarProperty Name="Video_card" ColumnName="Video_card" />
+                <ScalarProperty Name="Video_memory" ColumnName="Video_memory" />
+                <ScalarProperty Name="HDD" ColumnName="HDD" />
+                <ScalarProperty Name="HDD_capacity" ColumnName="HDD_capacity" />
+                <ScalarProperty Name="CD_ROM" ColumnName="CD_ROM" />
+                <ScalarProperty Name="Monitor" ColumnName="Monitor" />
+                <ScalarProperty Name="Monitor_2" ColumnName="Monitor_2" />
+                <ScalarProperty Name="Keyboard" ColumnName="Keyboard" />
+                <ScalarProperty Name="Mouse" ColumnName="Mouse" />
+                <ScalarProperty Name="Printer" ColumnName="Printer" />
+                <ScalarProperty Name="Scanner" ColumnName="Scanner" />
+                <ScalarProperty Name="Price_all" ColumnName="Price_all" />
+                <ScalarProperty Name="Purchase_date" ColumnName="Purchase_date" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Program">
+            <EntityTypeMapping TypeName="Model.Program">
+              <MappingFragment StoreEntitySet="Program">
+                <ScalarProperty Name="IDProgram" ColumnName="IDProgram" />
+                <ScalarProperty Name="Program_name" ColumnName="Program_name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Installation_date" ColumnName="Installation_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Program_Computer">
+            <EntityTypeMapping TypeName="Model.Program_Computer">
+              <MappingFragment StoreEntitySet="Program_Computer">
+                <ScalarProperty Name="IDProgram_Computer" ColumnName="IDProgram_Computer" />
+                <ScalarProperty Name="IDProgram" ColumnName="IDProgram" />
+                <ScalarProperty Name="IDComputer" ColumnName="IDComputer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RaM">
+            <EntityTypeMapping TypeName="Model.RaM">
+              <MappingFragment StoreEntitySet="RaM">
+                <ScalarProperty Name="IDRaM" ColumnName="IDRaM" />
+                <ScalarProperty Name="Repair_date" ColumnName="Repair_date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type_of_repair" ColumnName="Type_of_repair" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RaM_Computer">
+            <EntityTypeMapping TypeName="Model.RaM_Computer">
+              <MappingFragment StoreEntitySet="RaM_Computer">
+                <ScalarProperty Name="IDRaM_Computer" ColumnName="IDRaM_Computer" />
+                <ScalarProperty Name="IDRaM" ColumnName="IDRaM" />
+                <ScalarProperty Name="IDComputer" ColumnName="IDComputer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Account_name" ColumnName="Account_name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Creation_date" ColumnName="Creation_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Computer">
+            <EntityTypeMapping TypeName="Model.User_Computer">
+              <MappingFragment StoreEntitySet="User_Computer">
+                <ScalarProperty Name="IDUser_Computer" ColumnName="IDUser_Computer" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IDComputer" ColumnName="IDComputer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

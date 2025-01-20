@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7d9f4252fe70428095396f4075281edb" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Computer" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Program" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Program_Computer" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RaM" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RaM_Computer" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User_Computer" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__Program_C__IDCom__117F9D94" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__RaM_Compu__IDCom__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__User_Comp__IDCom__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Program_C__IDPro__108B795B" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__RaM_Compu__IDRaM__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__User_Comp__IDUse__164452B1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
