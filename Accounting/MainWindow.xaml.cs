@@ -1,5 +1,6 @@
 ﻿using Accounting.ApplicationData;
 using Accounting.Windows;
+using DevExpress.Data.Linq.Helpers;
 using DevExpress.Data.ODataLinq.Helpers;
 using DevExpress.Data.Utils;
 using Microsoft.Office.Interop.Excel;
@@ -130,32 +131,32 @@ namespace Accounting
             mWSheet1.Cells[1, 23] = "Notes"; //row, coloumn
             mWSheet1.Cells[1, 23].Font.Bold = true; //bold font
 
-
-            foreach (Computer computer in AppConnect.db.Computer)
+            for (int i = 0; i < AppConnect.db.Computer.Count(); i++)
             {
-                mWSheet1.Cells[2, 1] = computer.IDComputer;
-                mWSheet1.Cells[2, 2] = computer.Network_name;
-                mWSheet1.Cells[2, 3] = computer.IpAddress; ;
-                mWSheet1.Cells[2, 4] = computer.Location;
-                mWSheet1.Cells[2, 5] = computer.System_unit;
-                mWSheet1.Cells[2, 6] = computer.System_board;
-                mWSheet1.Cells[2, 7] = computer.Processor;
-                mWSheet1.Cells[2, 8] = computer.RAM;
-                mWSheet1.Cells[2, 9] = computer.Video_card;
-                mWSheet1.Cells[2, 10] = computer.Video_memory;
-                mWSheet1.Cells[2, 11] = computer.HDD;
-                mWSheet1.Cells[2, 12] = computer.HDD_capacity;
-                mWSheet1.Cells[2, 13] = computer.CD_ROM;
-                mWSheet1.Cells[2, 14] = computer.Monitor;
-                mWSheet1.Cells[2, 15] = computer.Monitor_2;
-                mWSheet1.Cells[2, 16] = computer.Keyboard;
-                mWSheet1.Cells[2, 17] = computer.Mouse;
-                mWSheet1.Cells[2, 18] = computer.Printer;
-                mWSheet1.Cells[2, 19] = computer.Scanner;
-                mWSheet1.Cells[2, 20] = computer.Price_all;
-                mWSheet1.Cells[2, 21] = computer.Purchase_date;
-                mWSheet1.Cells[2, 22] = computer.OS;
-                mWSheet1.Cells[2, 23] = computer.Notes;
+                Computer[] computer = AppConnect.db.Computer.ToArray<Computer>();
+                mWSheet1.Cells[i + 2, 1] = computer[i].IDComputer;
+                mWSheet1.Cells[i + 2, 2] = computer[i].Network_name;
+                mWSheet1.Cells[i + 2, 3] = computer[i].IpAddress;
+                mWSheet1.Cells[i + 2, 4] = computer[i].Location;
+                mWSheet1.Cells[i + 2, 5] = computer[i].System_unit;
+                mWSheet1.Cells[i + 2, 6] = computer[i].System_board;
+                mWSheet1.Cells[i + 2, 7] = computer[i].Processor;
+                mWSheet1.Cells[i + 2, 8] = computer[i].RAM;
+                mWSheet1.Cells[i + 2, 9] = computer[i].Video_card;
+                mWSheet1.Cells[i + 2, 10] = computer[i].Video_memory;
+                mWSheet1.Cells[i + 2, 11] = computer[i].HDD;
+                mWSheet1.Cells[i + 2, 12] = computer[i].HDD_capacity;
+                mWSheet1.Cells[i + 2, 13] = computer[i].CD_ROM;
+                mWSheet1.Cells[i + 2, 14] = computer[i].Monitor;
+                mWSheet1.Cells[i + 2, 15] = computer[i].Monitor_2;
+                mWSheet1.Cells[i + 2, 16] = computer[i].Keyboard;
+                mWSheet1.Cells[i + 2, 17] = computer[i].Mouse;
+                mWSheet1.Cells[i + 2, 18] = computer[i].Printer;
+                mWSheet1.Cells[i + 2, 19] = computer[i].Scanner;
+                mWSheet1.Cells[i + 2, 20] = computer[i].Price_all;
+                mWSheet1.Cells[i + 2, 21] = computer[i].Purchase_date.ToString();
+                mWSheet1.Cells[i + 2, 22] = computer[i].OS;
+                mWSheet1.Cells[i + 2, 23] = computer[i].Notes;
             }
             mWorkBook.SaveAs(System.IO.Path.Combine(Environment.CurrentDirectory, "Export", "data.csv"));
             mWorkBook.Close(true);
